@@ -1,0 +1,998 @@
+/* =============================================================================
+   SEO MCP Guard — Admin Stylesheet
+   Namespace: .seo-mcp-guard-wrap, .seo-mcp-*
+   Compatible with WordPress 6.x admin colour schemes.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   CSS Custom Properties (tokens)
+   ----------------------------------------------------------------------------- */
+:root {
+    --mcp-primary:          #2271b1;   /* WP primary blue */
+    --mcp-primary-hover:    #135e96;
+    --mcp-danger:           #d63638;
+    --mcp-danger-hover:     #b32d2e;
+    --mcp-success:          #00a32a;
+    --mcp-warning:          #dba617;
+    --mcp-info:             #72aee6;
+    --mcp-gray-50:          #f6f7f7;
+    --mcp-gray-100:         #ececec;
+    --mcp-gray-200:         #dcdcde;
+    --mcp-gray-500:         #787c82;
+    --mcp-gray-700:         #3c434a;
+    --mcp-gray-900:         #1d2327;
+    --mcp-radius:           4px;
+    --mcp-radius-lg:        8px;
+    --mcp-shadow:           0 1px 3px rgba(0,0,0,.08);
+    --mcp-shadow-card:      0 2px 8px rgba(0,0,0,.10);
+    --mcp-font-mono:        'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    --mcp-transition:       160ms ease;
+    /* Status colours */
+    --mcp-status-applied:     #00a32a;
+    --mcp-status-rolled-back: #e65f00;
+    --mcp-status-dry-run:     #2271b1;
+    --mcp-status-halted:      #d63638;
+}
+
+/* =============================================================================
+   Page Layout
+   ============================================================================= */
+.seo-mcp-guard-wrap {
+    max-width: 1100px;
+    margin-top: 20px;
+}
+
+.seo-mcp-guard-page-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 23px;
+    font-weight: 400;
+    margin-bottom: 24px;
+    color: var(--mcp-gray-900);
+}
+
+.seo-mcp-guard-page-title .dashicons {
+    font-size: 26px;
+    width: 26px;
+    height: 26px;
+    color: var(--mcp-primary);
+}
+
+/* =============================================================================
+   Cards
+   ============================================================================= */
+.seo-mcp-card {
+    background: #fff;
+    border: 1px solid var(--mcp-gray-200);
+    border-radius: var(--mcp-radius-lg);
+    box-shadow: var(--mcp-shadow-card);
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.seo-mcp-card--compact {
+    box-shadow: var(--mcp-shadow);
+}
+
+.seo-mcp-card--danger {
+    border-color: var(--mcp-danger);
+}
+
+.seo-mcp-card--danger .seo-mcp-card-header {
+    background: #fcefef;
+    border-bottom-color: #f8d0d0;
+}
+
+.seo-mcp-card--danger .seo-mcp-card-header h2 {
+    color: var(--mcp-danger);
+}
+
+.seo-mcp-card--new-token {
+    border-color: var(--mcp-success);
+    margin-bottom: 28px;
+}
+
+.seo-mcp-card--table {
+    padding: 0;
+}
+
+.seo-mcp-card-header {
+    padding: 18px 24px 14px;
+    border-bottom: 1px solid var(--mcp-gray-100);
+    background: var(--mcp-gray-50);
+}
+
+.seo-mcp-card-header--success {
+    background: #edfaef;
+    border-bottom-color: #b8e6be;
+}
+
+.seo-mcp-card-header--success h2 {
+    color: var(--mcp-success);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.seo-mcp-card-header h2 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--mcp-gray-900);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.seo-mcp-card-header .description {
+    margin: 0;
+    font-size: 13px;
+    color: var(--mcp-gray-500);
+}
+
+.seo-mcp-card-body {
+    padding: 20px 24px;
+}
+
+.seo-mcp-card-body--row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.seo-mcp-card-body--no-pad {
+    padding: 0;
+}
+
+/* =============================================================================
+   Form Fields
+   ============================================================================= */
+.seo-mcp-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--mcp-gray-100);
+}
+
+.seo-mcp-field:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.seo-mcp-field:first-child {
+    padding-top: 0;
+}
+
+.seo-mcp-field--stack {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.seo-mcp-field--inline {
+    flex: 1 1 280px;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: none;
+    background: var(--mcp-gray-50);
+    border: 1px solid var(--mcp-gray-200);
+    border-radius: var(--mcp-radius);
+    padding: 16px 20px;
+}
+
+.seo-mcp-field--prominent {
+    background: var(--mcp-gray-50);
+    border-radius: var(--mcp-radius);
+    padding: 20px;
+    margin-bottom: 8px;
+    border: none;
+    border-bottom: 1px solid var(--mcp-gray-100);
+}
+
+.seo-mcp-field--danger {
+    background: #fef9f9;
+    border-radius: var(--mcp-radius);
+    padding: 16px 20px;
+    border-bottom: none;
+    border: 1px solid #f8d0d0;
+    margin-top: 4px;
+}
+
+.seo-mcp-field-label-group {
+    flex: 1;
+    min-width: 240px;
+}
+
+.seo-mcp-field-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--mcp-gray-900);
+    margin-bottom: 4px;
+    cursor: default;
+}
+
+.seo-mcp-field-label--large {
+    font-size: 16px;
+}
+
+.seo-mcp-field .description {
+    font-size: 12px;
+    color: var(--mcp-gray-500);
+    margin: 4px 0 0;
+    max-width: 520px;
+}
+
+/* Number input with unit label */
+.seo-mcp-number-input {
+    width: 80px !important;
+    text-align: center;
+}
+
+.seo-mcp-unit {
+    font-size: 12px;
+    color: var(--mcp-gray-500);
+    margin-top: 4px;
+}
+
+/* Textarea */
+.seo-mcp-textarea {
+    width: 100%;
+    max-width: 540px;
+    font-family: var(--mcp-font-mono);
+    font-size: 13px;
+    resize: vertical;
+}
+
+/* =============================================================================
+   Toggle Switches (pure CSS, no JS dependency)
+   ============================================================================= */
+.seo-mcp-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+/* Hide the native checkbox visually but keep it accessible */
+.seo-mcp-toggle input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+/* Slider track */
+.seo-mcp-toggle-slider {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 26px;
+    background: var(--mcp-gray-200);
+    border-radius: 26px;
+    transition: background var(--mcp-transition);
+    flex-shrink: 0;
+}
+
+/* Knob */
+.seo-mcp-toggle-slider::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.25);
+    transition: transform var(--mcp-transition);
+}
+
+/* Checked state */
+.seo-mcp-toggle input:checked + .seo-mcp-toggle-slider {
+    background: var(--mcp-primary);
+}
+
+.seo-mcp-toggle input:checked + .seo-mcp-toggle-slider::after {
+    transform: translateX(22px);
+}
+
+/* Focus ring (keyboard accessibility) */
+.seo-mcp-toggle input:focus-visible + .seo-mcp-toggle-slider {
+    outline: 2px solid var(--mcp-primary);
+    outline-offset: 2px;
+}
+
+/* Large variant */
+.seo-mcp-toggle--large .seo-mcp-toggle-slider {
+    width: 64px;
+    height: 34px;
+}
+
+.seo-mcp-toggle--large .seo-mcp-toggle-slider::after {
+    width: 28px;
+    height: 28px;
+}
+
+.seo-mcp-toggle--large input:checked + .seo-mcp-toggle-slider::after {
+    transform: translateX(30px);
+}
+
+/* ON/OFF text labels (used on large toggle) */
+.seo-mcp-toggle-label-on,
+.seo-mcp-toggle-label-off {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    color: var(--mcp-gray-500);
+    display: none;
+}
+
+/* Danger variant */
+.seo-mcp-toggle--danger input:checked + .seo-mcp-toggle-slider {
+    background: var(--mcp-danger);
+}
+
+.seo-mcp-toggle--danger input:focus-visible + .seo-mcp-toggle-slider {
+    outline-color: var(--mcp-danger);
+}
+
+/* =============================================================================
+   Status Badges
+   ============================================================================= */
+.seo-mcp-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    white-space: nowrap;
+}
+
+/* Colour variants */
+.seo-mcp-badge--applied {
+    background: #edfaef;
+    color: #00661a;
+    border: 1px solid #b8e6be;
+}
+
+.seo-mcp-badge--rolled_back {
+    background: #fff3e0;
+    color: #994700;
+    border: 1px solid #f5c6a0;
+}
+
+.seo-mcp-badge--dry_run {
+    background: #e8f0fb;
+    color: #135e96;
+    border: 1px solid #bcd0f4;
+}
+
+.seo-mcp-badge--halted {
+    background: #fcefef;
+    color: #8a2424;
+    border: 1px solid #f8d0d0;
+}
+
+.seo-mcp-badge--danger {
+    background: #fcefef;
+    color: var(--mcp-danger);
+    border: 1px solid #f8d0d0;
+}
+
+.seo-mcp-badge--info {
+    background: #e8f0fb;
+    color: var(--mcp-primary);
+    border: 1px solid #bcd0f4;
+}
+
+/* =============================================================================
+   Checkbox Grid (Post Types)
+   ============================================================================= */
+.seo-mcp-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.seo-mcp-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: var(--mcp-radius);
+    border: 1px solid var(--mcp-gray-200);
+    transition: background var(--mcp-transition), border-color var(--mcp-transition);
+    font-size: 13px;
+}
+
+.seo-mcp-checkbox-label:hover {
+    background: var(--mcp-gray-50);
+    border-color: var(--mcp-info);
+}
+
+.seo-mcp-checkbox-label input[type="checkbox"] {
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.seo-mcp-checkbox-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-weight: 500;
+    color: var(--mcp-gray-700);
+}
+
+.seo-mcp-pt-slug {
+    font-size: 11px;
+    color: var(--mcp-gray-500);
+    background: none;
+    padding: 0;
+    font-weight: 400;
+}
+
+/* =============================================================================
+   Copy Row
+   ============================================================================= */
+.seo-mcp-copy-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.seo-mcp-copy-row .large-text {
+    flex: 1;
+    min-width: 200px;
+}
+
+.seo-mcp-copy-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.seo-mcp-copy-btn.copied {
+    color: var(--mcp-success) !important;
+    border-color: var(--mcp-success) !important;
+}
+
+/* =============================================================================
+   Submit Row
+   ============================================================================= */
+.seo-mcp-submit-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+    padding-bottom: 32px;
+}
+
+.seo-mcp-save-spinner {
+    float: none;
+    margin: 0;
+}
+
+/* =============================================================================
+   Filter Bar (Audit Log)
+   ============================================================================= */
+.seo-mcp-filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-end;
+    padding: 16px 20px;
+}
+
+.seo-mcp-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.seo-mcp-filter-input,
+.seo-mcp-filter-select {
+    height: 32px;
+    border: 1px solid var(--mcp-gray-200);
+    border-radius: var(--mcp-radius);
+    padding: 0 8px;
+    font-size: 13px;
+    color: var(--mcp-gray-900);
+    background: #fff;
+    transition: border-color var(--mcp-transition);
+}
+
+.seo-mcp-filter-input:focus,
+.seo-mcp-filter-select:focus {
+    border-color: var(--mcp-primary);
+    outline: none;
+    box-shadow: 0 0 0 1px var(--mcp-primary);
+}
+
+.seo-mcp-filter-input[type="number"] { width: 100px; }
+.seo-mcp-filter-input[type="date"]   { width: 140px; }
+.seo-mcp-filter-input[type="text"]   { width: 180px; }
+.seo-mcp-filter-select               { width: 140px; }
+
+.seo-mcp-filter-actions {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.seo-mcp-export-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+}
+
+/* =============================================================================
+   Status Tabs (Audit Log)
+   ============================================================================= */
+.seo-mcp-status-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.seo-mcp-status-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--mcp-gray-200);
+    background: #fff;
+    transition: background var(--mcp-transition), border-color var(--mcp-transition);
+    font-size: 13px;
+    color: var(--mcp-gray-700);
+}
+
+.seo-mcp-status-tab:hover,
+.seo-mcp-status-tab.is-active {
+    background: var(--mcp-gray-50);
+    border-color: var(--mcp-primary);
+    color: var(--mcp-primary);
+}
+
+.seo-mcp-status-count {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--mcp-gray-500);
+}
+
+/* =============================================================================
+   Log Table
+   ============================================================================= */
+.seo-mcp-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.seo-mcp-log-table,
+.seo-mcp-token-table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.seo-mcp-log-table th,
+.seo-mcp-log-table td,
+.seo-mcp-token-table th,
+.seo-mcp-token-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Column widths */
+.seo-mcp-log-table .column-change_id  { width: 90px; }
+.seo-mcp-log-table .column-batch_id   { width: 90px; }
+.seo-mcp-log-table .column-post       { width: 14%;  }
+.seo-mcp-log-table .column-field      { width: 120px; }
+.seo-mcp-log-table .column-old_value  { width: 14%;  }
+.seo-mcp-log-table .column-new_value  { width: 14%;  }
+.seo-mcp-log-table .column-user       { width: 100px; }
+.seo-mcp-log-table .column-status     { width: 100px; }
+.seo-mcp-log-table .column-time       { width: 140px; }
+.seo-mcp-log-table .column-actions    { width: 150px; overflow: visible; }
+
+.seo-mcp-token-table .column-label        { width: 35%; }
+.seo-mcp-token-table .column-token_id     { width: 80px; }
+.seo-mcp-token-table .column-created      { width: 18%; }
+.seo-mcp-token-table .column-last_used    { width: 18%; }
+.seo-mcp-token-table .column-token_actions { width: 160px; overflow: visible; }
+
+/* Row status colouring */
+.seo-mcp-log-row--applied     { border-left: 3px solid var(--mcp-status-applied);     }
+.seo-mcp-log-row--rolled_back { border-left: 3px solid var(--mcp-status-rolled-back); }
+.seo-mcp-log-row--dry_run     { border-left: 3px solid var(--mcp-status-dry-run);     }
+.seo-mcp-log-row--halted      { border-left: 3px solid var(--mcp-status-halted);      }
+
+/* Value cells with diff colouring */
+.seo-mcp-value-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    border-radius: 2px;
+    padding: 2px 4px;
+}
+
+.seo-mcp-value-cell--old {
+    background: #fff8f8;
+    color: #8a2424;
+}
+
+.seo-mcp-value-cell--new {
+    background: #f6fff7;
+    color: #00661a;
+}
+
+/* ID cells */
+.seo-mcp-id-cell {
+    font-size: 11px;
+    background: var(--mcp-gray-50);
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: var(--mcp-gray-500);
+}
+
+.seo-mcp-batch-link {
+    text-decoration: none;
+    color: var(--mcp-primary);
+}
+
+.seo-mcp-batch-link:hover {
+    text-decoration: underline;
+}
+
+.seo-mcp-no-value {
+    color: var(--mcp-gray-500);
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* =============================================================================
+   Pagination
+   ============================================================================= */
+.seo-mcp-tablenav {
+    padding: 8px 12px;
+    border-top: 1px solid var(--mcp-gray-100);
+}
+
+.seo-mcp-tablenav .tablenav-pages {
+    float: right;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.seo-mcp-tablenav .displaying-num {
+    font-size: 13px;
+    color: var(--mcp-gray-500);
+    margin-right: 8px;
+}
+
+/* =============================================================================
+   Empty State
+   ============================================================================= */
+.seo-mcp-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    color: var(--mcp-gray-500);
+    text-align: center;
+    gap: 12px;
+}
+
+.seo-mcp-empty-state .dashicons {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    opacity: .5;
+}
+
+.seo-mcp-empty-state p {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* =============================================================================
+   Inline AJAX Notices
+   ============================================================================= */
+.seo-mcp-ajax-notice {
+    padding: 10px 16px;
+    border-radius: var(--mcp-radius);
+    font-size: 13px;
+    margin-bottom: 16px;
+    border-left: 4px solid transparent;
+    transition: opacity var(--mcp-transition);
+}
+
+.seo-mcp-ajax-notice--success {
+    background: #edfaef;
+    border-color: var(--mcp-success);
+    color: #00661a;
+}
+
+.seo-mcp-ajax-notice--error {
+    background: #fcefef;
+    border-color: var(--mcp-danger);
+    color: #8a2424;
+}
+
+/* =============================================================================
+   New Token Display Box
+   ============================================================================= */
+.seo-mcp-new-token-alert {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: #fff8e1;
+    border: 1px solid #f5c100;
+    border-radius: var(--mcp-radius);
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    font-size: 13px;
+}
+
+.seo-mcp-new-token-alert .dashicons {
+    color: var(--mcp-warning);
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.seo-mcp-new-token-alert p {
+    margin: 0;
+    color: #5a3e00;
+    line-height: 1.5;
+}
+
+.seo-mcp-token-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 16px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    padding: 0;
+}
+
+.seo-mcp-token-meta dt {
+    font-weight: 600;
+    color: var(--mcp-gray-700);
+}
+
+.seo-mcp-token-meta dd {
+    margin: 0;
+    color: var(--mcp-gray-900);
+}
+
+.seo-mcp-token-display-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.seo-mcp-token-display {
+    font-family: var(--mcp-font-mono) !important;
+    font-size: 14px !important;
+    background: #f0f7ff !important;
+    border-color: var(--mcp-info) !important;
+    color: var(--mcp-gray-900) !important;
+    flex: 1;
+    min-width: 240px;
+    letter-spacing: .03em;
+}
+
+.seo-mcp-copy-token-btn {
+    flex-shrink: 0;
+}
+
+/* =============================================================================
+   Token Table
+   ============================================================================= */
+.seo-mcp-token-prefix {
+    font-family: var(--mcp-font-mono);
+    font-size: 11px;
+    background: var(--mcp-gray-100);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--mcp-gray-500);
+    margin-top: 2px;
+    display: inline-block;
+}
+
+/* =============================================================================
+   Generate Token Form
+   ============================================================================= */
+.seo-mcp-generate-form {
+    width: 100%;
+}
+
+.seo-mcp-generate-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.seo-mcp-generate-row .regular-text {
+    flex: 1;
+    min-width: 200px;
+    max-width: 420px;
+}
+
+.seo-mcp-gen-spinner {
+    float: none;
+    margin: 0;
+}
+
+/* =============================================================================
+   Config Code Blocks
+   ============================================================================= */
+.seo-mcp-code-block-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.seo-mcp-config-block {
+    background: var(--mcp-gray-900);
+    color: #a8d8a8;
+    font-family: var(--mcp-font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 16px 20px;
+    border-radius: var(--mcp-radius);
+    overflow-x: auto;
+    margin: 0;
+    white-space: pre;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.seo-mcp-copy-code-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,.12) !important;
+    border-color: rgba(255,255,255,.25) !important;
+    color: #fff !important;
+    font-size: 12px !important;
+}
+
+.seo-mcp-copy-code-btn:hover {
+    background: rgba(255,255,255,.22) !important;
+}
+
+.seo-mcp-copy-code-btn.copied {
+    color: #a8d8a8 !important;
+    border-color: #a8d8a8 !important;
+}
+
+/* =============================================================================
+   WP Notices
+   ============================================================================= */
+.seo-mcp-notice {
+    border-radius: var(--mcp-radius);
+}
+
+/* =============================================================================
+   Rollback / Revoke Spinner Row
+   ============================================================================= */
+.seo-mcp-revoke-spinner,
+.seo-mcp-revoke-btn {
+    vertical-align: middle;
+}
+
+/* =============================================================================
+   Responsive
+   ============================================================================= */
+@media (max-width: 782px) {
+    .seo-mcp-guard-wrap {
+        margin-top: 10px;
+    }
+
+    .seo-mcp-card-body--row {
+        flex-direction: column;
+    }
+
+    .seo-mcp-field {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .seo-mcp-toggle {
+        margin-top: 4px;
+    }
+
+    .seo-mcp-filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .seo-mcp-filter-input,
+    .seo-mcp-filter-select {
+        width: 100% !important;
+    }
+
+    .seo-mcp-checkbox-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .seo-mcp-generate-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .seo-mcp-generate-row .regular-text,
+    .seo-mcp-generate-row button {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .seo-mcp-token-display-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .seo-mcp-copy-token-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .seo-mcp-tablenav .tablenav-pages {
+        float: none;
+        justify-content: center;
+    }
+
+    .seo-mcp-status-tabs {
+        gap: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .seo-mcp-checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .seo-mcp-card-header,
+    .seo-mcp-card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}
